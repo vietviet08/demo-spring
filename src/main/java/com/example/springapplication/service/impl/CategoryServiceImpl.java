@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.springapplication.model.Category;
+import com.example.springapplication.model.CategoryResponse;
 import com.example.springapplication.repository.CategoryRepository;
 import com.example.springapplication.service.CategoryService;
 
@@ -27,8 +28,14 @@ public class CategoryServiceImpl implements CategoryService {
   }
 
   @Override
-  public Category save(Category category) {
-    return categoryRepository.save(category);
+  public CategoryResponse save(Category category) {
+    Category c = categoryRepository.save(category);
+    CategoryResponse cr = CategoryResponse.builder()
+        .id(c.getId())
+        .name(c.getName())
+        .decsription(c.getDescription())
+        .build();
+    return cr;
   }
 
   @Override

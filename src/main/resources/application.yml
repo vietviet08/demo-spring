@@ -1,6 +1,6 @@
 server:
   port: 8088
-
+#Map<String, Value>
 spring:
   application:
     name: demo

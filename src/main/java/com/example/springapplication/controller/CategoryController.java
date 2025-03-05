@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.springapplication.model.Category;
+import com.example.springapplication.model.CategoryResponse;
 import com.example.springapplication.service.CategoryService;
 
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,7 @@ public class CategoryController {
 
   private final CategoryService categoryService;
 
+  // http://localhost:8080/category/1
   @GetMapping("/category")
   public ResponseEntity<List<Category>> findAll() {
     return ResponseEntity
@@ -42,7 +44,7 @@ public class CategoryController {
   }
 
   @PostMapping("/category")
-  public ResponseEntity<Category> save(@RequestBody Category category) {
+  public ResponseEntity<CategoryResponse> save(@RequestBody Category category) {
     return ResponseEntity
         .status(HttpStatus.CREATED)
         .body(categoryService.save(category));
