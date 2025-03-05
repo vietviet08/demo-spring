@@ -3,7 +3,7 @@ package com.example.springapplication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-//anotation
+//annotation that tells Spring Boot that this is the starting point of the application
 @SpringBootApplication
 public class DemoApplication {
 

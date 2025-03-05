@@ -28,7 +28,6 @@ public class CategoryController {
 
   private final CategoryService categoryService;
 
-  // http://localhost:8080/category/1
   @GetMapping("/category")
   public ResponseEntity<List<Category>> findAll() {
     return ResponseEntity
