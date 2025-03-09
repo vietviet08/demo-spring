@@ -50,7 +50,8 @@ public class CategoryController {
   }
 
   @PutMapping("/category/{id}")
-  public ResponseEntity<Category> update(@PathVariable Long id, @RequestBody Category category) {
+  public ResponseEntity<Category> update(@PathVariable Long id,
+                                         @RequestBody Category category) {
     return ResponseEntity
         .status(HttpStatus.OK)
         .body(categoryService.update(id, category));
@@ -63,5 +64,4 @@ public class CategoryController {
         .status(HttpStatus.NO_CONTENT)
         .build();
   }
-
 }
