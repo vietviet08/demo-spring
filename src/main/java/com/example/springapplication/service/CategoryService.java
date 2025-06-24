@@ -3,6 +3,7 @@ package com.example.springapplication.service;
 import java.util.List;
 
 import com.example.springapplication.model.Category;
+import com.example.springapplication.model.CategoryRequest;
 import com.example.springapplication.model.CategoryResponse;
 
 public interface CategoryService {
@@ -10,9 +11,9 @@ public interface CategoryService {
 
   Category findById(Long id);
 
-  CategoryResponse save(Category category);
+  CategoryResponse save(CategoryRequest categoryRequest);
 
-  Category update(Long id, Category category);
+  Category update(Long id, CategoryRequest categoryRequest);
 
   void deleteById(Long id);
 }

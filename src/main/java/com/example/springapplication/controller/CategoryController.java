@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.springapplication.model.Category;
+import com.example.springapplication.model.CategoryRequest;
 import com.example.springapplication.model.CategoryResponse;
 import com.example.springapplication.service.CategoryService;
 
@@ -43,18 +44,18 @@ public class CategoryController {
   }
 
   @PostMapping("/category")
-  public ResponseEntity<CategoryResponse> save(@RequestBody Category category) {
+  public ResponseEntity<CategoryResponse> save(@RequestBody CategoryRequest categoryRequest) {
     return ResponseEntity
         .status(HttpStatus.CREATED)
-        .body(categoryService.save(category));
+        .body(categoryService.save(categoryRequest));
   }
 
   @PutMapping("/category/{id}")
   public ResponseEntity<Category> update(@PathVariable Long id,
-                                         @RequestBody Category category) {
+                                         @RequestBody CategoryRequest categoryRequest) {
     return ResponseEntity
         .status(HttpStatus.OK)
-        .body(categoryService.update(id, category));
+        .body(categoryService.update(id, categoryRequest));
   }
 
   @DeleteMapping("/category/{id}")

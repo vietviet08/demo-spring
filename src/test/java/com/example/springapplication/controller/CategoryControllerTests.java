@@ -1,6 +1,7 @@
 package com.example.springapplication.controller;
 
 import com.example.springapplication.model.Category;
+import com.example.springapplication.model.CategoryRequest;
 import com.example.springapplication.model.CategoryResponse;
 import com.example.springapplication.service.CategoryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -79,38 +80,39 @@ class CategoryControllerTests {
 
     @Test
     void save_shouldReturnCreatedCategoryResponse() throws Exception {
-        Category category = new Category(null, "New Category", "New Description");
+        CategoryRequest categoryRequest = new CategoryRequest("New Category", "New Description");
         CategoryResponse categoryResponse = new CategoryResponse(1L, "New Category", "New Description");
 
-        when(categoryService.save(any(Category.class))).thenReturn(categoryResponse);
+        when(categoryService.save(any(CategoryRequest.class))).thenReturn(categoryResponse);
 
         mockMvc.perform(post("/category")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(category)))
+                        .content(objectMapper.writeValueAsString(categoryRequest)))
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.name").value("New Category"))
                 .andExpect(jsonPath("$.description").value("New Description"));
 
-        verify(categoryService, times(1)).save(any(Category.class));
+        verify(categoryService, times(1)).save(any(CategoryRequest.class));
     }
 
     @Test
     void update_shouldReturnUpdatedCategory() throws Exception {
+        CategoryRequest categoryRequest = new CategoryRequest("Updated Category", "Updated Description");
         Category category = new Category(1L, "Updated Category", "Updated Description");
-        when(categoryService.update(eq(1L), any(Category.class))).thenReturn(category);
+        when(categoryService.update(eq(1L), any(CategoryRequest.class))).thenReturn(category);
 
         mockMvc.perform(put("/category/1")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(category)))
+                        .content(objectMapper.writeValueAsString(categoryRequest)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.name").value("Updated Category"))
                 .andExpect(jsonPath("$.description").value("Updated Description"));
 
-        verify(categoryService, times(1)).update(eq(1L), any(Category.class));
+        verify(categoryService, times(1)).update(eq(1L), any(CategoryRequest.class));
     }
 
     @Test

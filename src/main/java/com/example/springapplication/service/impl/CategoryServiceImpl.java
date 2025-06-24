@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.springapplication.model.Category;
+import com.example.springapplication.model.CategoryRequest;
 import com.example.springapplication.model.CategoryResponse;
 import com.example.springapplication.repository.CategoryRepository;
 import com.example.springapplication.service.CategoryService;
@@ -28,24 +29,29 @@ public class CategoryServiceImpl implements CategoryService {
   }
 
   @Override
-  public CategoryResponse save(Category category) {
-    Category c = categoryRepository.save(category);
-    CategoryResponse cr = CategoryResponse.builder()
-        .id(c.getId())
-        .name(c.getName())
-        .decsription(c.getDescription())
+  public CategoryResponse save(CategoryRequest categoryRequest) {
+    Category category = Category.builder()
+        .name(categoryRequest.name())
+        .description(categoryRequest.description())
         .build();
-    return cr;
+    
+    Category savedCategory = categoryRepository.save(category);
+    
+    return new CategoryResponse(
+        savedCategory.getId(),
+        savedCategory.getName(),
+        savedCategory.getDescription()
+    );
   }
 
   @Override
-  public Category update(Long id, Category category) {
+  public Category update(Long id, CategoryRequest categoryRequest) {
     Category updatedCategory = categoryRepository.findById(id).orElse(null);
     if(updatedCategory == null) {
       return null;
     }
-    updatedCategory.setName(category.getName());
-    updatedCategory.setDescription(category.getDescription());
+    updatedCategory.setName(categoryRequest.name());
+    updatedCategory.setDescription(categoryRequest.description());
     return categoryRepository.save(updatedCategory);
   }
 

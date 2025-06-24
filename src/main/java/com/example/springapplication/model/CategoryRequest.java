@@ -1,7 +1,6 @@
 package com.example.springapplication.model;
 
-public record CategoryResponse(
-    Long id,
+public record CategoryRequest(
     String name,
     String description
 ) {

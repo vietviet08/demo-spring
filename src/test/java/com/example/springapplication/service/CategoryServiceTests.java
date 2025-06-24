@@ -1,6 +1,7 @@
 package com.example.springapplication.service;
 
 import com.example.springapplication.model.Category;
+import com.example.springapplication.model.CategoryRequest;
 import com.example.springapplication.model.CategoryResponse;
 import com.example.springapplication.repository.CategoryRepository;
 import com.example.springapplication.service.impl.CategoryServiceImpl;
@@ -72,25 +73,25 @@ class CategoryServiceImplTests {
 
     @Test
     void save_shouldReturnSavedCategoryResponse() {
-        Category categoryToSave = new Category(null, "New Category", "New Description");
+        CategoryRequest categoryRequest = new CategoryRequest("New Category", "New Description");
         Category savedCategory = new Category(1L, "New Category", "New Description");
         when(categoryRepository.save(any(Category.class))).thenReturn(savedCategory);
 
-        CategoryResponse result = categoryService.save(categoryToSave);
+        CategoryResponse result = categoryService.save(categoryRequest);
 
-        assertEquals(1L, result.getId());
-        assertEquals("New Category", result.getName());
-        assertEquals("New Description", result.getDecsription());
+        assertEquals(1L, result.id());
+        assertEquals("New Category", result.name());
+        assertEquals("New Description", result.description());
         verify(categoryRepository, times(1)).save(any(Category.class));
     }
 
     @Test
     void update_shouldUpdateCategoryIfExists() {
-        Category updatedCategoryData = new Category(null, "Updated Category", "Updated Description");
+        CategoryRequest categoryRequest = new CategoryRequest("Updated Category", "Updated Description");
         when(categoryRepository.findById(1L)).thenReturn(Optional.of(category1));
         when(categoryRepository.save(any(Category.class))).thenReturn(category1);
 
-        Category result = categoryService.update(1L, updatedCategoryData);
+        Category result = categoryService.update(1L, categoryRequest);
 
         assertEquals("Updated Category", result.getName());
         assertEquals("Updated Description", result.getDescription());
@@ -100,10 +101,10 @@ class CategoryServiceImplTests {
 
     @Test
     void update_shouldReturnNullIfNotExists() {
-        Category updatedCategoryData = new Category(null, "Updated Category", "Updated Description");
+        CategoryRequest categoryRequest = new CategoryRequest("Updated Category", "Updated Description");
         when(categoryRepository.findById(1L)).thenReturn(Optional.empty());
 
-        Category result = categoryService.update(1L, updatedCategoryData);
+        Category result = categoryService.update(1L, categoryRequest);
 
         assertNull(result);
         verify(categoryRepository, times(1)).findById(1L);
