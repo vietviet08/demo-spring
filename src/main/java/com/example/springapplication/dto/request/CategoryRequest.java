@@ -1,4 +1,4 @@
-package com.example.springapplication.model;
+package com.example.springapplication.dto.request;
 
 public record CategoryRequest(
     String name,

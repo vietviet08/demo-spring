@@ -1,8 +1,8 @@
 package com.example.springapplication.service;
 
+import com.example.springapplication.dto.request.CategoryRequest;
+import com.example.springapplication.dto.response.CategoryResponse;
 import com.example.springapplication.model.Category;
-import com.example.springapplication.model.CategoryRequest;
-import com.example.springapplication.model.CategoryResponse;
 import com.example.springapplication.repository.CategoryRepository;
 import com.example.springapplication.service.impl.CategoryServiceImpl;
 import org.junit.jupiter.api.BeforeEach;

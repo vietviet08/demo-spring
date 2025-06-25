@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.springapplication.dto.request.CategoryRequest;
+import com.example.springapplication.dto.response.CategoryResponse;
 import com.example.springapplication.model.Category;
-import com.example.springapplication.model.CategoryRequest;
-import com.example.springapplication.model.CategoryResponse;
 import com.example.springapplication.repository.CategoryRepository;
 import com.example.springapplication.service.CategoryService;
 

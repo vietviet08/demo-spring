@@ -23,10 +23,7 @@ public class TestController {
   public ResponseEntity<Greeting> test() {
     return ResponseEntity
         .status(HttpStatus.OK)
-        .body(Greeting.builder()
-            .id(1L)
-            .content("Hello, World!, vietquoc ")
-            .build());
+        .body(new Greeting(1L, "Hello, World!, vietquoc "));
   }
 
   @GetMapping("/java-version")

@@ -1,4 +1,4 @@
-package com.example.springapplication.model;
+package com.example.springapplication.dto.response;
 
 public record CategoryResponse(
     Long id,
